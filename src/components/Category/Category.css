@@ -1,0 +1,28 @@
+.Category-Holder{
+    width: 45%;
+    height: 30vh;
+    background: rgb(255,208,174);
+    background: radial-gradient(circle, rgba(255,208,174,1) 0%, rgba(255,255,255,1) 72%);
+    border-radius: 40px;
+    display: flex;
+    padding: 2%;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.Category-Left{
+    flex: 1;
+    color: #45409C;
+    font-size: 20px;
+    font-weight: 600;
+}
+.Category-Right{
+    flex: 1;
+
+    & img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}

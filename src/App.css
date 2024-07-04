@@ -1,0 +1,47 @@
+.App-Container{
+  width: 100%;
+  height: 100% auto;
+  min-height: 100vh;
+  background: rgb(255,202,164);
+  background: radial-gradient(circle, rgba(255,202,164,1) 0%, rgba(255,180,126,1) 29%, rgba(255,202,164,1) 68%, rgba(255,180,126,1) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.App-Holder {
+  width: 100%;
+  height: 100% auto;
+  min-height: 100vh;
+  background-color: white;
+  padding: 10px;
+  margin: 20px;
+  border-radius:40px;
+  overflow: hidden;
+}
+.App-Content{
+  width: 100%;
+  height: 100% auto;
+  min-height: 100vh;
+  border-radius: inherit;
+  background-color: #FFEBC1;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+}
+.App-Items {
+  width: 92%;
+  height: 100% auto;
+  min-height: 100vh;
+  /* background-color: white; */
+  /* position: absolute; */
+  top: 25%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: -10%;
+  /* align-items: center; */
+}
