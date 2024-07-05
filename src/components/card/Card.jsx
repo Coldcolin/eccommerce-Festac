@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
 import { RiApps2Fill } from "react-icons/ri";
 
-const Card = ({id, info}) => {
+const Card = ({info}) => {
     return (
-        <div className="Card-Container" key={id}>
+        <div className="Card-Container" key={info.id}>
             <div className="Card-Items">
                 <div className="Card-Top">
-                    <Link to={`/detail/${1}`} className="Card-Circle"><RiApps2Fill/></Link>
+                    <Link to={`/detail/${info.id}`} className="Card-Circle"><RiApps2Fill/></Link>
                     <div className="Card-Circle"><GiShoppingBag/></div>
                 </div>
                 <div className="Card-Image">

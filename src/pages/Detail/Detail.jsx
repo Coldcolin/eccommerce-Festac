@@ -1,17 +1,27 @@
-import shoe from "../../assets/shoe.avif";
-import "./Detail.css"
+import "./Detail.css";
+import {useParams} from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { ProductContext } from "../../context/ContextProvider";
 
 const Detail = () => {
+    const {id}= useParams();
+    const {products} = useContext(ProductContext);
+    const [product, setProduct]= useState({})
+
+    useEffect(()=>{
+        const item = products.filter((e)=> e.id == id);
+        setProduct(item[0])
+    },[])
   return (
     <div className="Detail-Container">
         <div className="Detail-Content">
             <div className="Detail-Left">
-                <h3>Nike Air Max 270 to Chuck Taylor</h3>
-                <div>Nikes Air Force 1s were amongst the most popular sneakers this year</div>
+                <h3>{product.name}</h3>
+                <div>{product.description}</div>
             </div>
             <div className="Detail-Center">
-                <img src={shoe} alt="shoe"/>
-                <h3>$290.00</h3>
+                <img src={product.image} alt="shoe"/>
+                <h3>${product.price}</h3>
             </div>
             <div className="Detail-Right">
                 <div>Add to Cart</div>

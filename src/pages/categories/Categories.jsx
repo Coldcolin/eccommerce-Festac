@@ -1,12 +1,22 @@
 import Category from "../../components/Category/Category"
-import "./Categories.css"
+import "./Categories.css";
+import { useContext, useState, useEffect} from "react";
+import { ProductContext } from "../../context/ContextProvider";
 
 const Categories = () => {
-    const Categories = Array(10).fill(0).map((_, i)=> i + 1)
+    const {products} = useContext(ProductContext)
+    const [categories, setCategories] = useState([])
+
+    useEffect(()=>{
+      const values = products.map((e)=>{
+        return {cat: e.category, img: e.img}
+      })
+      const singleCat = values.reduce()
+    }, [])
   return (
     <div className="Categories-Container">
         {
-            Categories.map((e, i)=> (
+            categories.map((e, i)=> (
                 <Category key={i}/>
             ))
         }

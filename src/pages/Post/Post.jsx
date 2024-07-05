@@ -1,20 +1,11 @@
 import "./Post.css";
 import placeholder from "../../assets/placeholder.png"
-import { useReducer, useState } from "react";
+import { useContext, useState } from "react";
+import { ProductContext } from "../../context/ContextProvider";
 
-const initialState = [];
-
-const reducer=(state, action)=>{
-  if(action.type === "addProduct"){
-      localStorage.setItem("products", JSON.stringify([...state, {...action.payload}]))
-      return [...state, {...action.payload}];
-  }else{
-    throw new Error()
-  }
-}
 
 const Post = () => {
-  const [products, dispatch] = useReducer(reducer, initialState);
+  const {dispatch}= useContext(ProductContext)
   const [inputValues, setInputValues] = useState({});
   const [displayImage, setDisplayImage] = useState(placeholder);
 
@@ -26,8 +17,8 @@ const Post = () => {
   }
 
   const addProduct=()=>{
-      console.log(products);
-      dispatch({type: "addProduct", payload: inputValues})
+      dispatch({type: "addProduct", payload: inputValues});
+      setInputValues({});
   }
 
 

@@ -1,14 +1,16 @@
 // import { useState } from 'react';
 import Card from '../../components/card/Card';
+import { useContext } from 'react';
+import { ProductContext } from '../../context/ContextProvider';
 
 const Home = () => {
-    // const [items, setItems] = useState(JSON.parse(localStorage.getItem("products")))
-    // const items = Array(30).fill(0).map((_, i) => i + 1);
-    const items = JSON.parse(localStorage.getItem("products"));
+    const {products }= useContext(ProductContext);
+    console.log(products)
+    // const items = JSON.parse(localStorage.getItem("products"));
     return (
       <>
         {
-          items.map((e, i)=>(<Card id={i} info={e}/>))
+          products.map((e)=>(<Card info={e}/>))
         }
       </>
     )
