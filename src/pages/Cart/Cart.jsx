@@ -1,8 +1,11 @@
 import CartItems from "../../components/CartItems/CartItems"
 import "./Cart.css"
+import { useContext } from "react";
+import { ProductContext } from "../../context/ContextProvider";
 
 const Cart = () => {
-    const cartItems = Array(5).fill(0).map((_, i)=> i + 1)
+    const {cart} = useContext(ProductContext);
+    console.log(cart)
   return (
     <div className="Cart-Container">
         <div className="Cart-Info">
@@ -13,8 +16,8 @@ const Cart = () => {
         </div>
         <div className="CartHolder">
             {
-                cartItems.map((e)=>(
-                    <CartItems key={e?.id} info={e}/>
+                cart.map((e, i)=>(
+                    <CartItems key={e.id} info={e}/>
                 ))
             }
         </div>

@@ -10,7 +10,7 @@ const Home = () => {
     return (
       <>
         {
-          products.map((e)=>(<Card info={e}/>))
+          products.map((e)=>(<Card info={e} key={e.id}/>))
         }
       </>
     )

@@ -2,14 +2,14 @@ import "./Category.css";
 import Boots from "../../assets/Boots.jpg"
 import { Link } from "react-router-dom";
 
-const Category = () => {
+const Category = ({vals}) => {
   return (
     <Link to={`/category/1`} className="Category-Holder">
         <div className="Category-Left">
-            Category
+            {vals.cat}
         </div>
         <div className="Category-Right">
-            <img src={Boots} alt="Category"/>
+            <img src={vals.img} alt="Category"/>
         </div>
     </Link>
   )

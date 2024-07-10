@@ -10,6 +10,7 @@ import Detail from './pages/Detail/Detail';
 import Products from './pages/Products/Products';
 import Cart from './pages/Cart/Cart';
 import Post from './pages/Post/Post';
+import AuthLayout from './components/AuthLayout/AuthLayout';
 
 
 const router = createBrowserRouter([
@@ -43,11 +44,34 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/auth",
+    element: <AuthLayout/>,
+    children: [
+      {
+        path:"login",
+        element:<>
+        <div>
+          <h1>Login Page</h1>
+        </div>
+        </>
+      },
+      {
+        path:"signUp",
+        element:<>
+        <div>
+          <h1>Sign Up Page</h1>
+        </div>
+        </>
+      }
+    ]
+      
+  }
   
 ]);
 
 function App() {
-
+  
   return(
     <RouterProvider router={router} />
   )

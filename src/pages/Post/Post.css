@@ -56,7 +56,7 @@
         border: 2px solid white;
         cursor: pointer;
     }
-    & div{
+    & button{
         width: 100px;
         height: 40px;
         background-color: black;
@@ -67,7 +67,7 @@
         border-radius: 20px;
         transition: 350ms;
     }
-    & div:hover{
+    & button:hover{
         background-color: rgb(254,168,72);
         transition: 350ms;
         border: 2px solid white;

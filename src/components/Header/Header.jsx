@@ -2,8 +2,11 @@ import "./Header.css";
 import { CgMenuGridR } from "react-icons/cg";
 import { Link, NavLink } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
+import {useContext} from "react"
+import { ProductContext } from "../../context/ContextProvider";
 
 const Header = () => {
+    const {cart} = useContext(ProductContext)
   return (
     <div className="Header-Container">
     <section className="Header-Logo">
@@ -20,7 +23,7 @@ const Header = () => {
             <p>$230</p>
             <Link to="/Cart">
                 <GiShoppingBag/>
-                <div>0</div>
+                <div>{cart.length}</div>
             </Link>
             
         </div>
