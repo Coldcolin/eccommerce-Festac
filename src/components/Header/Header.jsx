@@ -6,7 +6,7 @@ import {useContext} from "react"
 import { ProductContext } from "../../context/ContextProvider";
 
 const Header = () => {
-    const {cart} = useContext(ProductContext)
+    const {cart, total} = useContext(ProductContext)
   return (
     <div className="Header-Container">
     <section className="Header-Logo">
@@ -20,7 +20,7 @@ const Header = () => {
     </section>
     <section>
         <div className="Header-Cart">
-            <p>$230</p>
+            <p>${total}</p>
             <Link to="/Cart">
                 <GiShoppingBag/>
                 <div>{cart.length}</div>

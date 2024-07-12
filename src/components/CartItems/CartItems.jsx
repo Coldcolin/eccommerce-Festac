@@ -15,7 +15,7 @@ const CartItems = ({info}) => {
         <p>{info.description}</p>
         <div className="CartItemsInfo">
             <p>#{info.price}</p>
-            <button className="CartItemDelete">Delete</button>
+            <button className="CartItemDelete" onClick={()=> cartDispatch({type: "delete", payload: info.id})}>Delete</button>
             <div className="CartActions">
                 <button disabled={info.QTY === 1} onClick={()=> cartDispatch({type: "decrease", payload: info})}>-</button>
                 <p>{info.QTY}</p>

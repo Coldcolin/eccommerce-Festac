@@ -5,8 +5,12 @@ import { ProductContext } from "../../context/ContextProvider";
 
 const Detail = () => {
     const {id}= useParams();
-    const {products} = useContext(ProductContext);
+    const {products, cartDispatch} = useContext(ProductContext);
     const [product, setProduct]= useState({})
+
+    const addToCart=()=>{
+        cartDispatch({type: "addToCart", payload: product})
+    }
 
     useEffect(()=>{
         const item = products.filter((e)=> e.id == id);
@@ -24,7 +28,7 @@ const Detail = () => {
                 <h3>${product.price}</h3>
             </div>
             <div className="Detail-Right">
-                <div>Add to Cart</div>
+                <div onClick={addToCart} style={{cursor: "pointer"}}>Add to Cart</div>
             </div>
         </div>
     </div>
