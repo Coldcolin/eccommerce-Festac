@@ -15,7 +15,6 @@ const cartRed=(state, action)=>{
       alert("Item already added");
       return state
     }
-    
   }else if(action.type === "increase"){
     return state.map((e)=>{
       if(e.id === action.payload.id){

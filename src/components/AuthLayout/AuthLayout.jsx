@@ -1,12 +1,10 @@
 import {Outlet}from "react-router-dom";
+import "./AuthLayout.css"
 
 const AuthLayout=()=>{
     return(
-        <div>
-            <div>Header</div>
-            <div>Hero</div>
+        <div className="Auth_layout">
             <Outlet/>
-            <div>Footer</div>
         </div>
         
     )

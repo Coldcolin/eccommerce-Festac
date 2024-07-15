@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
 import {useContext} from "react"
 import { ProductContext } from "../../context/ContextProvider";
+import { FaUser } from "react-icons/fa";
 
 const Header = () => {
     const {cart, total} = useContext(ProductContext)
@@ -20,6 +21,7 @@ const Header = () => {
     </section>
     <section>
         <div className="Header-Cart">
+            <Link to="/auth/login"><FaUser/></Link>
             <p>${total}</p>
             <Link to="/Cart">
                 <GiShoppingBag/>

@@ -11,6 +11,8 @@ import Products from './pages/Products/Products';
 import Cart from './pages/Cart/Cart';
 import Post from './pages/Post/Post';
 import AuthLayout from './components/AuthLayout/AuthLayout';
+import Login from './pages/Login/Login';
+import SignUp from './pages/SignUp/SignUp';
 
 
 const router = createBrowserRouter([
@@ -50,19 +52,11 @@ const router = createBrowserRouter([
     children: [
       {
         path:"login",
-        element:<>
-        <div>
-          <h1>Login Page</h1>
-        </div>
-        </>
+        element:<Login/>
       },
       {
         path:"signUp",
-        element:<>
-        <div>
-          <h1>Sign Up Page</h1>
-        </div>
-        </>
+        element:<SignUp/>
       }
     ]
       
