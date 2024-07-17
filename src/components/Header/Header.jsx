@@ -1,13 +1,23 @@
 import "./Header.css";
 import { CgMenuGridR } from "react-icons/cg";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
-import {useContext} from "react"
+import {useContext, useEffect} from "react"
 import { ProductContext } from "../../context/ContextProvider";
 import { FaUser } from "react-icons/fa";
+import { logOut } from "../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
-    const {cart, total} = useContext(ProductContext)
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const {cart, total} = useContext(ProductContext);
+    const checkIfLoggedIn = useSelector((state)=> state.auth.isLoggedIn);
+    useEffect(()=>{
+        if(checkIfLoggedIn === false){
+            navigate("/auth/login")
+        }
+    },[checkIfLoggedIn])
   return (
     <div className="Header-Container">
     <section className="Header-Logo">
@@ -21,7 +31,7 @@ const Header = () => {
     </section>
     <section>
         <div className="Header-Cart">
-            <Link to="/auth/login"><FaUser/></Link>
+            <div onClick={()=>dispatch(logOut())}>LogOut</div>
             <p>${total}</p>
             <Link to="/Cart">
                 <GiShoppingBag/>
