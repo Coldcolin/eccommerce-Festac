@@ -12,7 +12,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {cart, total} = useContext(ProductContext);
-    const checkIfLoggedIn = useSelector((state)=> state.auth.isLoggedIn);
+    const checkIfLoggedIn = useSelector((state)=> state.isLoggedIn);
     useEffect(()=>{
         if(checkIfLoggedIn === false){
             navigate("/auth/login")

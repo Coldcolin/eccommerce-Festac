@@ -3,50 +3,58 @@ import "./SignUp.css"
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { signUpUser } from "../../features/auth/authSlice";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 
 
 const SignUp=()=>{
     const [seePassword, setSeePassword] = useState(false);
-    const [seeError, setSeeError] = useState(false);
-    const [userInfo, setUserInfo]= useState({})
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const handleForm=(t)=>{
-        t.preventDefault();
-        const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/; 
-        const numberRegex = /\d/;
+    const User = z.object({
+        name: z.string().min(3, { message: "Must be 3 or more characters long" }),
+        phoneNumber: z.string().length(10, {message: "Must be greater than 10 digits"}),
+        dob: z.string().date(),
+        email: z.string().trim().email({message: "use a correct email"}).endsWith(".com", { message: "Only .com and .ng domains allowed" }),
+        password: z.string().regex(/[!@#$%^&*(),.?":{}|<>]\d/, {message: "password must contain special character and number"})
+    });
+    
+    const {register,handleSubmit, formState: { errors }} = useForm({ resolver: zodResolver(User) });
+     
 
-        if(specialCharacterRegex.test(userInfo.password) && numberRegex.test(userInfo.password)){
-            dispatch(signUpUser(userInfo));
+
+     
+
+    const handleForm=async(t)=>{
+        try{
+            dispatch(signUpUser(t))
             navigate("/auth/login")
-        }else{
-            setSeeError(true)
+        }catch(err){
+            console.log(err)
         }
     }
 
-    useEffect(()=>{
-        const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/; 
-        const numberRegex = /\d/;
-
-        if(specialCharacterRegex.test(userInfo.password) && numberRegex.test(userInfo.password)){
-            setSeeError(false)
-        }
-    },[userInfo.password])
     return(
         <div className="Sign_Card">
             <h2>Sign Up</h2>
-            <form onSubmit={handleForm} >
-                <input placeholder="email" type="email" onChange={(e)=> setUserInfo((p)=> {return {...p, email: e.target.value}} )} required={true} />
-                <input placeholder="name" type="text" onChange={(e)=> setUserInfo((p)=> {return {...p, name: e.target.value}} )} required={true} name="name" autoComplete="off"/>
-                <input placeholder="date of Birth" type="date" onChange={(e)=> setUserInfo((p)=> {return {...p, dob: e.target.value}} )}/>
-                <input placeholder="Phone Number" type="number" onChange={(e)=> setUserInfo((p)=> {return {...p, phoneNumber: e.target.value}})} required={true} name="Phone Number" autoComplete="off"/>
-                {seeError === false? null:<section className="signUpError">password should contain 1 special character, 1 number</section>}
+            <form  onSubmit={handleSubmit(handleForm)}>
+                <input placeholder="email" required={true} {...register("email")}/>
+                {errors.email && <span className="signUpError">{errors.email.message}</span>}
+                <input placeholder="name" type="text" required={true} name="name" autoComplete="off" {...register("name")}/>
+                {errors.name && <span className="signUpError">{errors.name.message}</span>}
+                <input placeholder="date of Birth" type="date" {...register("dob")}/>
+                {errors.dob && <span className="signUpError">{errors.dob.message}</span>}
+                <input placeholder="Phone Number" type="number" name="Phone Number" autoComplete="off" {...register("phoneNumber")}/>
+                {errors.phoneNumber && <span className="signUpError">{errors.phoneNumber.message}</span>}
                 <div>
-                <input placeholder="password" type={seePassword? "text":"password"} onChange={(e)=> setUserInfo((p)=> {return {...p, password: e.target.value}})} required={true} />
+                <input placeholder="password" type={seePassword? "text":"password"}  required={true} {...register("password")}/>
                 {seePassword?<IoEyeOff onClick={()=>setSeePassword(!seePassword)}/>: <IoEye onClick={()=>setSeePassword(!seePassword)}/>}
+                {errors.password && <span className="signUpError">{errors.password.message}</span>}
                 </div>
                 <button type="submit">Sign Up</button>
             </form>

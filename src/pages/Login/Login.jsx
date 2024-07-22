@@ -11,8 +11,8 @@ const Login =()=>{
     const [loginInfo, setLoginInfo] = useState({});
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const checkIfLoggedIn = useSelector((state)=> state.auth.isLoggedIn);
-
+    const checkIfLoggedIn = useSelector((state)=> state.isLoggedIn);
+    // console.log(useSelector((state)=> state.users))
     const loginFunc=(e)=>{
         e.preventDefault()
         dispatch(loginUser(loginInfo));
