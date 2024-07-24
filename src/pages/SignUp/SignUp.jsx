@@ -3,7 +3,7 @@ import "./SignUp.css"
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { signUpUser } from "../../features/auth/authSlice";
 import { z } from "zod";
 import { useForm } from "react-hook-form";

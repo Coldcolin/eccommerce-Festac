@@ -17,11 +17,11 @@ const Login =()=>{
         e.preventDefault()
         dispatch(loginUser(loginInfo));
     }
-    useEffect(()=>{
-        if(checkIfLoggedIn === true){
-            navigate("/")
-        }
-    },[checkIfLoggedIn])
+    // useEffect(()=>{
+    //     if(checkIfLoggedIn === true){
+    //         navigate("/")
+    //     }
+    // },[checkIfLoggedIn])
     return(
         <div className="Login_Card">
             <h2>Login</h2>

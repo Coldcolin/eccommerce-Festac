@@ -1,10 +1,9 @@
 import "./CartItems.css"
-import shoe from "../../assets/shoe.avif"
-import { useContext } from "react"
-import { ProductContext } from "../../context/ContextProvider"
+import { useDispatch } from "react-redux"
+import { increaseQuantity, decreaseQuantity, deleteItem } from "../../features/auth/authSlice"
 
 const CartItems = ({info}) => {
-    const {cartDispatch} = useContext(ProductContext)
+    const dispatch = useDispatch()
   return (
     <div className="CartItemContainer">
     <div className="CartItemImage">
@@ -15,11 +14,11 @@ const CartItems = ({info}) => {
         <p>{info.description}</p>
         <div className="CartItemsInfo">
             <p>#{info.price}</p>
-            <button className="CartItemDelete" onClick={()=> cartDispatch({type: "delete", payload: info.id})}>Delete</button>
+            <button className="CartItemDelete" onClick={()=> dispatch(deleteItem(info.id))}>Delete</button>
             <div className="CartActions">
-                <button disabled={info.QTY === 1} onClick={()=> cartDispatch({type: "decrease", payload: info})}>-</button>
+                <button disabled={info.QTY === 1} onClick={()=> dispatch(decreaseQuantity(info))}>-</button>
                 <p>{info.QTY}</p>
-                <button onClick={()=> cartDispatch({type: "increase", payload: info})}>+</button>
+                <button onClick={()=> dispatch(increaseQuantity(info))}>+</button>
             </div>
         </div>
     </div>

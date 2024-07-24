@@ -13,6 +13,7 @@ import Post from './pages/Post/Post';
 import AuthLayout from './components/AuthLayout/AuthLayout';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
+import AuthRoutes from './components/AuthRoutes/AuthRoutes';
 
 
 const router = createBrowserRouter([
@@ -29,8 +30,14 @@ const router = createBrowserRouter([
         element: <Categories/>
       },
       {
-        path: "/detail/:id",
-        element: <Detail/>
+        path: "/detail",
+        element: <AuthRoutes/>,
+        children:[
+          {
+            path: ":id",
+            element: <Detail/>
+          }
+        ]
       },
       {
         path: "/Category/:categoryId",

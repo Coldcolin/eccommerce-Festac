@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
 import { RiApps2Fill } from "react-icons/ri";
 import { ProductContext } from "../../context/ContextProvider";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../features/auth/authSlice";
 
 const Card = ({info}) => {
     const {cartDispatch} = useContext(ProductContext);
+    const dispatch = useDispatch()
 
-    const addToCart=()=>{
-        cartDispatch({type: "addToCart", payload: info})
+    const addCart=()=>{
+        dispatch(addToCart(info))
+        // cartDispatch({type: "addToCart", payload: info})
     }
 
     return (
@@ -17,7 +21,7 @@ const Card = ({info}) => {
             <div className="Card-Items">
                 <div className="Card-Top">
                     <Link to={`/detail/${info.id}`} className="Card-Circle"><RiApps2Fill/></Link>
-                    <div className="Card-Circle" onClick={addToCart} style={{cursor: "pointer"}}><GiShoppingBag/></div>
+                    <div className="Card-Circle" onClick={addCart} style={{cursor: "pointer"}}><GiShoppingBag/></div>
                 </div>
                 <div className="Card-Image">
                     <img src={info.image} alt="shoe"/>

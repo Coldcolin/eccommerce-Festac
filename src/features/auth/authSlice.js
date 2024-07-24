@@ -5,7 +5,8 @@ export const authSlice = createSlice(
         name: 'auth',
         initialState: {
             users: [],
-            isLoggedIn: false
+            isLoggedIn: false,
+            cart: []
           },
           reducers:{
             signUpUser: (state, action)=>{
@@ -31,10 +32,51 @@ export const authSlice = createSlice(
             },
             logOut: (state, action)=>{
               state.isLoggedIn = false;
-            }
+            },
+            addToCart:(state, action)=>{
+              const check = state.cart.findIndex((e)=> e.id === action.payload.id)
+              // if(check === -1){
+              const newState = [...state.cart, {...action.payload, QTY: 1}];
+              state.cart = newState;
+              // }else{
+              // alert("Item already added");
+              // }
+          },
+          increaseQuantity:(state, action)=>{
+              const newState = state.cart.map((e)=>{
+                  if(e.id === action.payload.id){
+                    e.QTY++
+                    return e
+                  }else{
+                    return e
+                  }
+                });
+                state.cart = newState
+          },
+          decreaseQuantity:(state, action)=>{
+              if(action.payload.QTY === 1){
+                state.cart = state.cart.filter((e)=> e.id !== action.payload.id)
+                }else{
+                  state.cart = state.cart.map((e)=>{
+                    if(e.id === action.payload.id){
+                      e.QTY--
+                      return e
+                    }else{
+                      return e
+                    }
+              })
+          }
+        },
+        deleteItem:(state, action)=>{
+          const id = action.payload;
+          state.cart = state.cart.filter((e)=> e.id !== id)
+        },
+        clearCart: (state, action)=>{
+          state.cart = []
+        }
           }
     }
 );
 
-export const { signUpUser, loginUser, logOut} = authSlice.actions;
+export const { signUpUser, loginUser, logOut, addToCart, increaseQuantity, decreaseQuantity, deleteItem, clearCart} = authSlice.actions;
 export default authSlice.reducer
